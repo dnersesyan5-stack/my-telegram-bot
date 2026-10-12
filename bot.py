@@ -56,14 +56,16 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(
-        "📌 Как пользоваться:\n\n"
-        "📱 Проверить телефон — формат, регион и тип.\n"
-        "🔎 Искать упоминания — ссылки на поиск номера.\n"
-        "👤 Проверить @username — ссылка на публичный профиль "
-        "и поиск упоминаний ника.\n\n"
-        "Можно также отправить номер или @username напрямую.",
-        reply_markup=MENU,
+    
+        await update.message.reply_text(
+            f"👤 ОТЧЁТ ПО НИКНЕЙМУ\n\n"
+            f"Никнейм: @{username}\n"
+            f"Публичная ссылка: https://t.me/{username}\n\n"
+            f"🔎 Поиск публичных упоминаний:\n"
+            f"{search_links(chr(34) + username + chr(34))}\n\n"
+            "⚠️ Ссылка не подтверждает личность владельца.",
+            reply_markup=MENU,
+        )
     )
 
 async def phone_report(update, text, search=False):
