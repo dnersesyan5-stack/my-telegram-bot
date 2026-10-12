@@ -165,6 +165,10 @@ async def handle_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if text.startswith("@") or mode == "username":
         username = text.lstrip("@").strip()
 
+     
+    if text.startswith("@") or mode == "username":
+        username = text.lstrip("@").strip()
+
         if not re.fullmatch(r"[A-Za-z0-9_]{5,32}", username):
             await update.message.reply_text(
                 "Проверь формат никнейма. Отправь @username.",
@@ -173,16 +177,17 @@ async def handle_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return
 
         context.user_data["mode"] = None
-        await update.message.reply_text(
-            f"👤 ОТЧЁТ ПО НИКНЕЙМУ\n\n"
+        report = (
+            "👤 ОТЧЁТ ПО НИКНЕЙМУ\n\n"
             f"Никнейм: @{username}\n"
             f"Публичная ссылка: https://t.me/{username}\n\n"
-            f"🔎 Поиск публичных упоминаний:\n"
-            f"{search_links('"' + username + '"')}\n\n"
-            "⚠️ Ссылка не подтверждает личность владельца.",
-            reply_markup=MENU,
+            "🔎 Поиск публичных упоминаний:\n"
+            f"{search_links(chr(34) + username + chr(34))}\n\n"
+            "⚠️ Ссылка не подтверждает личность владельца."
         )
+        await update.message.reply_text(report, reply_markup=MENU)
         return
+
 
     if mode in ("phone", "search") or re.search(r"\d", text):
         context.user_data["mode"] = None
