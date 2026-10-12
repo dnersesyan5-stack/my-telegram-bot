@@ -55,11 +55,14 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         reply_markup=MENU,
     )
 
-async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+
     
- 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
+
+
+
+        
         "📌 Как пользоваться:\n\n"
         "📱 Проверить телефон — формат, регион и тип.\n"
         "🔎 Искать упоминания — ссылки на поиск номера.\n"
